@@ -1,7 +1,5 @@
-.message {
-    height: 500px;
-}
-
-.box {
-    height: 250px;
+.listItem {
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
 }

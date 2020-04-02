@@ -1,66 +1,68 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Weather Dashboard</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="script" href="script.js">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Weather App</title>
 </head>
 
 <body>
     <!-- Header -->
-    <section class="hero is-dark">
-        <div class="hero-body">
+    <section class="header">
+        <div class="jumbotron jumbotron-fluid">
             <div class="container">
-                <h1 class="title">
-                    Weather Banner
-                </h1>
-                <h2 class="subtitle">
-                    Weather info for the city of your choice.
-                </h2>
+                <h1 class="display-4">Weather Dashboard</h1>
             </div>
-        </div>
     </section>
-    <br>
 
-    <div class="columns">
-        <!-- Search area -->
-        <div class="column is-one-third">
-            <article class="message">
-                <div class="message-body">
-                    <p>Search for a City:</p>
-                    <div class="field has-addons">
-                        <div class="control">
-                            <input class="input" type="text" id="cityForm" placeholder="Enter a city name">
-                        </div>
-                        <div class="control">
-                            <a class="button is-info">
-                                Search
-                            </a>
+    <div class="container">
+        <div class="row">
+
+            <!-- Search City by Name form-->
+            <div class="col-4">
+                <div class="card">
+                    <h5 class="card-header">Search for a City:</h5>
+                    <div class="card-body" id="pastCitiesList">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Enter a City">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button">Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </article>
-        </div>
+            </div>
 
-        <!-- Search results -->
-        <div class="searchRes"></div>
-
-        <!-- Today's weather info -->
-        <div class="column">
-            <div class="box">
-
+            <!-- Search Results -->
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body searchRes"></div>
+                </div>
             </div>
         </div>
-
     </div>
 
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="script.js"></script>
 </body>
 
 </html>
