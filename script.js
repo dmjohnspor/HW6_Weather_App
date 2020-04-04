@@ -4,14 +4,24 @@ var btn = $(".btn");
 btn.on("click", function (event) {
     event.preventDefault();
 
-    // Variables used for the cities list:
+    // Adding cities to the cities list:
     var listEntry = $("<div>");
     var cityName = $(".form-control").val();
-
-    // Adding cities to the search list
     listEntry.text(cityName);
     listEntry.addClass("card listItem");
     $("#pastCitiesList").append(listEntry);
+
+    // Storing cities in local storage:
+    currentList = localStorage.getItem("city");
+    if (currentList === null) {
+        localStorage.setItem("city", cityName);
+    }
+    else {
+        currentList = [localStorage.getItem("city")];
+        currentList.push(cityName);
+        localStorage.setItem("city", JSON.stringify(currentList))
+        console.log(currentList);
+    }
 
     // First ajax call (by city name):
     var APIkey = "031f158b8aa6738886dd6a6cbc74318e";
@@ -23,7 +33,6 @@ btn.on("click", function (event) {
         method: "GET"
     })
         .then(function (response1) {
-            console.log(response1)
             // Collect data and store it into variables:
             var name = response1.name;
             var description = response1.weather.description;
@@ -37,11 +46,21 @@ btn.on("click", function (event) {
             var windMiles = wind.toFixed(1);
 
             // Display data on the page:
+            // City name date and icon:
+            $("<div>").addClass("resHeader");
             $(".resHeader").text(name);
             $(".resHeader").append(icon);
+            // Brief weather description:
+            $("<div>").addClass("description");
             $(".description").text(description);
+            // Temperature:
+            $("<div>").addClass("resTemp");
             $(".resTemp").text("Temperature: " + tempF);
+            // Humidity:
+            $("<div>").addClass("resHum");
             $(".resHum").text("Humidity: " + hum + "%");
+            // Wind Speed:
+            $("<div>").addClass("resWind");
             $(".resWind").text("Wind speed: " + windMiles + "MPH");
 
             //Second ajax call (by coordinates):
@@ -53,9 +72,10 @@ btn.on("click", function (event) {
                 method: "GET"
             })
                 .then(function (response2) {
-
-                    // Display data on the page
+                    console.log(response2);
+                    // Display  UV data on the page
                     var UV = response2.value;
+                    $("<div>").addClass("resUV");
                     $(".resUV").text("UV Index: " + UV);
                 })
         })
