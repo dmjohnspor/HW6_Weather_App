@@ -10,10 +10,16 @@ if (pastCities !== null) {
     }
 }
 
-var btn = $(".btn");
-
 // On click functions:
-btn.on("click", function (event) {
+// Reset:
+var resetBtn = $("#resetBtn");
+resetBtn.on("click", function () {
+    $("#pastCitiesList").empty();
+})
+
+// Search:
+var searchBtn = $("#searchBtn");
+searchBtn.on("click", function (event) {
     event.preventDefault();
 
     // Adding cities to the cities list:
@@ -21,7 +27,7 @@ btn.on("click", function (event) {
     var cityName = $(".form-control").val();
     listEntry.text(cityName);
     listEntry.addClass("card listItem");
-    $("#pastCitiesList").append(listEntry);
+    $("#pastCitiesList").prepend(listEntry);
 
     // Storing cities in local storage:
     currentList = localStorage.getItem("city");
@@ -38,7 +44,6 @@ btn.on("click", function (event) {
     // First ajax call (by city name):
     var APIkey = "031f158b8aa6738886dd6a6cbc74318e";
     var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIkey;
-
 
     $.ajax({
         url: queryURL1,
@@ -89,8 +94,9 @@ btn.on("click", function (event) {
                     $("<div>").addClass("resUV");
                     $(".resUV").text("UV Index: " + UV);
                 })
+
+
+
         })
-
-
 
 })

@@ -26,18 +26,25 @@
     <div class="container">
         <div class="row">
 
-            <!-- Search City by Name form-->
             <div class="col-4">
+                <!-- Search City by Name form-->
                 <div class="card">
                     <h5 class="card-header">Search for a City:</h5>
-                    <div class="card-body" id="pastCitiesList">
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="serachBox" placeholder="Enter a City">
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" type="button">Search</button>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="searchBox" placeholder="Enter a city">
                             </div>
-                        </div>
+                            <button type="button" id="searchBtn" class="btn btn-light">Search</button>
+                            <button type="reset" id="resetBtn" class="btn btn-light">Reset</button>
+                        </form>
                     </div>
+                </div>
+                <br>
+                <!-- Search history -->
+                <div class="card">
+                    <h5 class="card-header">Search History:</h5>
+                    <div class="card-body" id="pastCitiesList"></div>
                 </div>
             </div>
 
