@@ -1,3 +1,15 @@
+// Render past cities buttons from local storage:
+
+var pastCities = localStorage.getItem("city");
+if (pastCities !== null) {
+    pastCities = JSON.parse(pastCities);
+    for (var i = 0; i < pastCities.length; i++) {
+        var newDiv = $("<div>").text(pastCities[i]);
+        newDiv.addClass("card listItem");
+        $("#pastCitiesList").append(newDiv);
+    }
+}
+
 var btn = $(".btn");
 
 // On click functions:
@@ -14,13 +26,13 @@ btn.on("click", function (event) {
     // Storing cities in local storage:
     currentList = localStorage.getItem("city");
     if (currentList === null) {
-        localStorage.setItem("city", cityName);
+        currentList = [cityName]
+        localStorage.setItem("city", JSON.stringify(currentList));
     }
     else {
-        currentList = [localStorage.getItem("city")];
+        currentList = JSON.parse(currentList);
         currentList.push(cityName);
-        localStorage.setItem("city", JSON.stringify(currentList))
-        console.log(currentList);
+        localStorage.setItem("city", JSON.stringify(currentList));
     }
 
     // First ajax call (by city name):
@@ -72,7 +84,6 @@ btn.on("click", function (event) {
                 method: "GET"
             })
                 .then(function (response2) {
-                    console.log(response2);
                     // Display  UV data on the page
                     var UV = response2.value;
                     $("<div>").addClass("resUV");
