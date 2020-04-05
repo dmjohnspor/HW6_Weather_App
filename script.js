@@ -1,35 +1,28 @@
 // Render past cities buttons from local storage:
-
 var pastCities = localStorage.getItem("city");
 if (pastCities !== null) {
     pastCities = JSON.parse(pastCities);
     for (var i = 0; i < pastCities.length; i++) {
         var newDiv = $("<div>").text(pastCities[i]);
         newDiv.addClass("card listItem");
-        $("#pastCitiesList").append(newDiv);
+        $("#searchHistory").append(newDiv);
     }
 }
 
-// On click functions:
-// Reset:
-var resetBtn = $("#resetBtn");
-resetBtn.on("click", function () {
-    $("#pastCitiesList").empty();
-})
+// Functions:
 
-// Search:
-var searchBtn = $("#searchBtn");
-searchBtn.on("click", function (event) {
-    event.preventDefault();
-
-    // Adding cities to the cities list:
+// Adding city names to the City History list
+function addToSearchHistory() {
     var listEntry = $("<div>");
     var cityName = $(".form-control").val();
     listEntry.text(cityName);
     listEntry.addClass("card listItem");
-    $("#pastCitiesList").prepend(listEntry);
+    $("#searchHistory").prepend(listEntry);
+}
 
-    // Storing cities in local storage:
+// Storing cities in local storage:
+function storeToLocalStorage() {
+    var cityName = $(".form-control").val();
     currentList = localStorage.getItem("city");
     if (currentList === null) {
         currentList = [cityName]
@@ -40,63 +33,115 @@ searchBtn.on("click", function (event) {
         currentList.push(cityName);
         localStorage.setItem("city", JSON.stringify(currentList));
     }
+}
 
-    // First ajax call (by city name):
+// First ajax call:
+function firsCall() {
     var APIkey = "031f158b8aa6738886dd6a6cbc74318e";
-    var queryURL1 = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + APIkey;
+    var cityName = $(".form-control").val();
+    var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIkey;
 
     $.ajax({
         url: queryURL1,
         method: "GET"
-    })
-        .then(function (response1) {
-            // Collect data and store it into variables:
-            var name = response1.name;
-            var description = response1.weather.description;
-            var icon = response1.weather.icon;
-            var tempK = response1.main.temp;
-            var temp = ((tempK - 273.15) * 1.8) + 32
-            var tempF = temp.toFixed(1);
-            var hum = response1.main.humidity;
-            var windMeters = response1.wind.speed;
-            var wind = windMeters * 2.237;
-            var windMiles = wind.toFixed(1);
+    }).then(function (response1) {
+        console.log(response1);
+        // Collect data and store it into variables:
+        var name = response1.city.name;
+        var description = response1.list[0].weather[0].description;
+        var icon = response1.list[0].weather[0].icon;
+        var temp = response1.list[0].main.temp;
+        var hum = response1.list[0].main.humidity;
+        var wind = response1.list[0].wind.speed;
 
-            // Display data on the page:
-            // City name date and icon:
-            $("<div>").addClass("resHeader");
-            $(".resHeader").text(name);
-            $(".resHeader").append(icon);
-            // Brief weather description:
-            $("<div>").addClass("description");
-            $(".description").text(description);
-            // Temperature:
-            $("<div>").addClass("resTemp");
-            $(".resTemp").text("Temperature: " + tempF);
-            // Humidity:
-            $("<div>").addClass("resHum");
-            $(".resHum").text("Humidity: " + hum + "%");
-            // Wind Speed:
-            $("<div>").addClass("resWind");
-            $(".resWind").text("Wind speed: " + windMiles + "MPH");
+        // Display data on the page:
+        // City name date and icon:
+        $("<div>").addClass("resHeader");
+        $(".resHeader").text(name);
+        // Brief weather description:
+        $("<div>").addClass("description");
+        $(".description").text(description);
+        // Temperature:
+        $("<div>").addClass("resTemp");
+        $(".resTemp").text("Temperature: " + temp + " F");
+        // Humidity:
+        $("<div>").addClass("resHum");
+        $(".resHum").text("Humidity: " + hum + "%");
+        // Wind Speed:
+        $("<div>").addClass("resWind");
+        $(".resWind").text("Wind speed: " + wind + " MPH");
 
-            //Second ajax call (by coordinates):
-            var lat = response1.coord.lat;
-            var lon = response1.coord.lon;
-            var querryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIkey + "&lat=" + lat + "&lon=" + lon;
-            $.ajax({
-                url: querryURL2,
-                method: "GET"
-            })
-                .then(function (response2) {
-                    // Display  UV data on the page
-                    var UV = response2.value;
-                    $("<div>").addClass("resUV");
-                    $(".resUV").text("UV Index: " + UV);
-                })
+        // Use the call to display the 5-day forecast:
+        // Day 1
+        var date1 = response1.list[8].dt_txt;
+        var icon1 = response1.list[8].weather[0].icon;
+        var temp1 = response1.list[8].main.temp;
+        var hum1 = response1.list[8].main.humidity;
+        $("#day1Date").text(date1);
+        $("#day1Temp").text("Temp: " + temp1 + " F");
+        $("#day1Hum").text("Humidity: " + hum1 + "%");
+        // Day 2
+        var date2 = response1.list[16].dt_txt;
+        var icon2 = response1.list[16].weather[0].icon;
+        var temp2 = response1.list[16].main.temp;
+        var hum2 = response1.list[16].main.humidity;
+        $("#day2Date").text(date2);
+        $("#day2Temp").text("Temp: " + temp2 + " F");
+        $("#day2Hum").text("Humidity: " + hum2 + "%");
+        // Day 3
+        var date3 = response1.list[24].dt_txt;
+        var icon3 = response1.list[24].weather[0].icon;
+        var temp3 = response1.list[24].main.temp;
+        var hum3 = response1.list[24].main.humidity;
+        $("#day3Date").text(date3);
+        $("#day3Temp").text("Temp: " + temp3 + " F");
+        $("#day3Hum").text("Humidity: " + hum3 + "%");
+        // Day 4
+        var date4 = response1.list[32].dt_txt;
+        var icon4 = response1.list[32].weather[0].icon;
+        var temp4 = response1.list[32].main.temp;
+        var hum4 = response1.list[32].main.humidity;
+        $("#day4Date").text(date4);
+        $("#day4Temp").text("Temp: " + temp4 + " F");
+        $("#day4Hum").text("Humidity: " + hum4 + "%");
+        // Day 5
+        var date5 = response1.list[39].dt_txt;
+        var icon5 = response1.list[39].weather[0].icon;
+        var temp5 = response1.list[39].main.temp;
+        var hum5 = response1.list[39].main.humidity;
+        $("#day5Date").text(date5);
+        $("#day5Temp").text("Temp: " + temp5 + " F");
+        $("#day5Hum").text("Humidity: " + hum5 + "%");
 
-
-
+        //Second ajax call (by coordinates):
+        var lat = response1.city.coord.lat;
+        var lon = response1.city.coord.lon;
+        var querryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIkey + "&lat=" + lat + "&lon=" + lon;
+        $.ajax({
+            url: querryURL2,
+            method: "GET"
         })
+            // Display  UV data on the page
+            .then(function (response2) {
+                var UV = response2.value;
+                $("<div>").addClass("resUV");
+                $(".resUV").text("UV Index: " + UV);
+            })
+    })
+}
 
+// On click functions:
+// Reset button:
+var resetBtn = $("#resetBtn");
+resetBtn.on("click", function () {
+    $("#searchHistory").empty();
+    $("#searchRes").empty();
+})
+// Search button:
+var searchBtn = $("#searchBtn");
+searchBtn.on("click", function (event) {
+    event.preventDefault();
+    addToSearchHistory();
+    storeToLocalStorage();
+    firsCall();
 })
