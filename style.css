@@ -3,3 +3,10 @@
     text-align: center;
     margin: 10px;
 }
+
+.forecastBox {
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    margin: 15px;
+}

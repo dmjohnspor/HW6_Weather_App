@@ -36,9 +36,8 @@ function storeToLocalStorage() {
 }
 
 // First ajax call:
-function firsCall() {
+function ajaxCall(cityName) {
     var APIkey = "031f158b8aa6738886dd6a6cbc74318e";
-    var cityName = $(".form-control").val();
     var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIkey;
 
     $.ajax({
@@ -73,15 +72,19 @@ function firsCall() {
 
         // Use the call to display the 5-day forecast:
         // Day 1
-        var date1 = response1.list[8].dt_txt;
+        var date = response1.list[8].dt_txt;
+        var date1 = date.slice(0, 10);
         var icon1 = response1.list[8].weather[0].icon;
         var temp1 = response1.list[8].main.temp;
         var hum1 = response1.list[8].main.humidity;
+        $("#day1").addClass("card day forecastBox")
         $("#day1Date").text(date1);
         $("#day1Temp").text("Temp: " + temp1 + " F");
         $("#day1Hum").text("Humidity: " + hum1 + "%");
         // Day 2
-        var date2 = response1.list[16].dt_txt;
+        $("#day2").addClass("card day forecastBox")
+        var date = response1.list[16].dt_txt;
+        var date2 = date.slice(0, 10);
         var icon2 = response1.list[16].weather[0].icon;
         var temp2 = response1.list[16].main.temp;
         var hum2 = response1.list[16].main.humidity;
@@ -89,7 +92,9 @@ function firsCall() {
         $("#day2Temp").text("Temp: " + temp2 + " F");
         $("#day2Hum").text("Humidity: " + hum2 + "%");
         // Day 3
-        var date3 = response1.list[24].dt_txt;
+        $("#day3").addClass("card day forecastBox")
+        var date = response1.list[24].dt_txt;
+        var date3 = date.slice(0, 10);
         var icon3 = response1.list[24].weather[0].icon;
         var temp3 = response1.list[24].main.temp;
         var hum3 = response1.list[24].main.humidity;
@@ -97,7 +102,9 @@ function firsCall() {
         $("#day3Temp").text("Temp: " + temp3 + " F");
         $("#day3Hum").text("Humidity: " + hum3 + "%");
         // Day 4
-        var date4 = response1.list[32].dt_txt;
+        $("#day4").addClass("card day forecastBox")
+        var date = response1.list[32].dt_txt;
+        var date4 = date.slice(0, 10);
         var icon4 = response1.list[32].weather[0].icon;
         var temp4 = response1.list[32].main.temp;
         var hum4 = response1.list[32].main.humidity;
@@ -105,7 +112,9 @@ function firsCall() {
         $("#day4Temp").text("Temp: " + temp4 + " F");
         $("#day4Hum").text("Humidity: " + hum4 + "%");
         // Day 5
-        var date5 = response1.list[39].dt_txt;
+        $("#day5").addClass("card day forecastBox")
+        var date = response1.list[39].dt_txt;
+        var date5 = date.slice(0, 10);
         var icon5 = response1.list[39].weather[0].icon;
         var temp5 = response1.list[39].main.temp;
         var hum5 = response1.list[39].main.humidity;
@@ -129,8 +138,8 @@ function firsCall() {
             })
     })
 }
-
 // On click functions:
+
 // Reset button:
 var resetBtn = $("#resetBtn");
 resetBtn.on("click", function () {
@@ -143,5 +152,18 @@ searchBtn.on("click", function (event) {
     event.preventDefault();
     addToSearchHistory();
     storeToLocalStorage();
-    firsCall();
+    ajaxCall($(".form-control").val());
 })
+
+// Past city names list:
+var searchHistoryEntries = [$(".listItem")]
+console.log(searchHistoryEntries[0]);
+// for (var k = 0; k < historyBtn.length; k++) {
+//     historyBtn[k].on("click", function (event) {
+//         event.preventDefault();
+//         ajaxCall(historyBtn[k].text())
+//     })
+// }
+
+
+
