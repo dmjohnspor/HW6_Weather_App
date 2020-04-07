@@ -38,7 +38,7 @@ function storeToLocalStorage() {
 // First ajax call:
 function ajaxCall(cityName) {
     var APIkey = "031f158b8aa6738886dd6a6cbc74318e";
-    var queryURL1 = "http://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIkey;
+    var queryURL1 = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + APIkey;
 
     $.ajax({
         url: queryURL1,
@@ -125,7 +125,7 @@ function ajaxCall(cityName) {
         //Second ajax call (by coordinates):
         var lat = response1.city.coord.lat;
         var lon = response1.city.coord.lon;
-        var querryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + APIkey + "&lat=" + lat + "&lon=" + lon;
+        var querryURL2 = "https://api.openweathermap.org/data/2.5/uvi?appid=" + APIkey + "&lat=" + lat + "&lon=" + lon;
         $.ajax({
             url: querryURL2,
             method: "GET"
