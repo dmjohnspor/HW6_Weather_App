@@ -1,28 +1,28 @@
 // Render past cities buttons from local storage:
-var pastCities = localStorage.getItem("city");
+let pastCities = localStorage.getItem("city");
 if (pastCities !== null) {
     pastCities = JSON.parse(pastCities);
-    for (var i = 0; i < pastCities.length; i++) {
-        var newDiv = $("<div>").text(pastCities[i]);
-        newDiv.addClass("card listItem");
-        $("#searchHistory").append(newDiv);
+    for (let i = 0; i < pastCities.length; i++) {
+        $("#search_history").append(`<a class="waves-effect waves-pink btn-flat">${pastCities[i]}</a>
+        <br>`);
     }
 }
 
 // Functions:
 
 // Adding city names to the City History list
-function addToSearchHistory() {
-    var listEntry = $("<div>");
-    var cityName = $(".form-control").val();
-    listEntry.text(cityName);
-    listEntry.addClass("card listItem");
-    $("#searchHistory").prepend(listEntry);
+const addToSearchHistory = () => {
+    const cityName = $("#city_search").val().trim();
+    $("#search_history").prepend(`<a class="waves-effect waves-pink btn-flat">${cityName}</a>
+    <br>`);
 }
-
+// Empty search input field
+const emptySearchInput = () => {
+    $("#city_search").val("");
+}
 // Storing cities in local storage:
-function storeToLocalStorage() {
-    var cityName = $(".form-control").val();
+const storeToLocalStorage = () => {
+    const cityName = $("#city_search").val().trim();
     currentList = localStorage.getItem("city");
     if (currentList === null) {
         currentList = [cityName]
@@ -140,19 +140,21 @@ function ajaxCall(cityName) {
 }
 // On click functions:
 
+// Search button:
+const searchBtn = $("#searchBtn");
+searchBtn.on("click", event => {
+    event.preventDefault();
+    addToSearchHistory();
+    storeToLocalStorage();
+    emptySearchInput();
+    // ajaxCall($(".form-control").val());
+})
+
 // Reset button:
 var resetBtn = $("#resetBtn");
 resetBtn.on("click", function () {
     $("#searchHistory").empty();
     $("#searchRes").empty();
-})
-// Search button:
-var searchBtn = $("#searchBtn");
-searchBtn.on("click", function (event) {
-    event.preventDefault();
-    addToSearchHistory();
-    storeToLocalStorage();
-    ajaxCall($(".form-control").val());
 })
 
 // Past city names list:

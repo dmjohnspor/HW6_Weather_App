@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+        media="screen,projection" />
+
+    <!-- Import custom css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/weatherApp.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
+    <title>Weather App</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel large"
+                style="background: url(assets/images/clouds.jpg); background-position: center; background-size: cover; background-repeat: no-repeat;">
+                <h4 class="white-text">Weather Dashboard</h4>
+            </div>
+        </div>
+    </div>
+    <br>
+
+
+    <div class="row">
+        <div class="col s4">
+            <!-- Search for a city input -->
+            <div class="card pink lighten-5">
+                <div class="card-content">
+                    <p>Search for a city</p>
+                    <div class="card-action">
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="input-field">
+                                <input id="city_search" type="text" class="validate">
+                                <label for="city_search">City</label>
+                            </div>
+                        </div>
+                        <!-- Search button -->
+                        <a class="waves-effect waves-light btn pink lighten-2" id="searchBtn">
+                            <i class="material-icons left">search</i>
+                            Search
+                        </a>
+                        <!-- Clear search history button -->
+                        <a class="waves-effect waves-light btn pink lighten-2">
+                            <i class="material-icons left">replay</i>
+                            Clear History
+                        </a>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Search history card-->
+            <div class="card pink lighten-5">
+                <div class="card-content">
+                    <p>Search history</p>
+                    <div class="card-action" id="search_history"></div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- jQuery slim minified -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <!-- Custom JavaScript -->
+        <script type="text/javascript" src="assets/js/weatherApp.js"></script>
+</body>
+
+</html>
