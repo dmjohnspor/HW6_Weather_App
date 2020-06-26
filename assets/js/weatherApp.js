@@ -3,7 +3,7 @@ let pastCities = localStorage.getItem("city");
 if (pastCities !== null) {
     pastCities = JSON.parse(pastCities);
     for (let i = 0; i < pastCities.length; i++) {
-        $("#search_history").append(`<a class="waves-effect waves-pink btn-flat">${pastCities[i]}</a>
+        $("#search_history").append(`<a class="waves-effect waves-light-blue btn-flat">${pastCities[i]}</a>
         <br>`);
     }
 }
@@ -13,7 +13,7 @@ if (pastCities !== null) {
 // Adding city names to the City History list
 const addToSearchHistory = () => {
     const cityName = $("#city_search").val().trim();
-    $("#search_history").prepend(`<a class="waves-effect waves-pink btn-flat">${cityName}</a>
+    $("#search_history").prepend(`<a class="waves-effect waves-light-blue btn-flat">${cityName}</a>
     <br>`);
 }
 // Empty search input field
@@ -151,10 +151,11 @@ searchBtn.on("click", event => {
 })
 
 // Reset button:
-var resetBtn = $("#resetBtn");
+const resetBtn = $("#resetBtn");
 resetBtn.on("click", function () {
-    $("#searchHistory").empty();
-    $("#searchRes").empty();
+    $("#search_history").empty();
+    $("#search_res").empty();
+    localStorage.clear();
 })
 
 // Past city names list:
