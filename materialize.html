@@ -32,7 +32,7 @@
     </div>
     <br>
 
-
+    <!-- Left column: Search area -->
     <div class="row">
         <div class="col s4">
             <!-- Search for a city input -->
@@ -71,17 +71,45 @@
             </div>
         </div>
 
+        <!-- Right column: Results area -->
+        <div class="col s8">
+            <!-- Search results for main city -->
+            <div class="card horizontal light-blue lighten-5">
+                <div class="card-image">
+                    <img src="">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <h6>The weather today:</h6>
+                        <h6 class="city_name"></h6>
+                        <p class="des"></p>
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col s6">
+                                    <div class="temp"></div>
+                                    <div class="hum"></div>
+                                </div>
+                                <div class="col s6">
+                                    <div class="wind"></div>
+                                    <div class="UV"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- jQuery slim minified -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
 
-        <!--JavaScript at end of body for optimized loading-->
-        <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <!-- jQuery  -->
+            <script src="https://code.jquery.com/jquery-3.5.1.js"
+                integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-        <!-- Custom JavaScript -->
-        <script type="text/javascript" src="assets/js/weatherApp.js"></script>
+            <!--JavaScript at end of body for optimized loading-->
+            <script type="text/javascript"
+                src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+            <!-- Custom JavaScript -->
+            <script type="text/javascript" src="assets/js/weatherApp.js"></script>
 </body>
 
 </html>
